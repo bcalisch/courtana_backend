@@ -12,7 +12,7 @@ import java.util.List;
  */
 public interface CitationRepository extends JpaRepository<Citations, String> {
 
-    @Query("SELECT c.first_name, c.last_name, c.court_date FROM Citations c WHERE c.drivers_license_number = 'A840420280'")
+    @Query("SELECT c.first_name, c.last_name, c.court_date FROM Citations c WHERE c.drivers_license_number = :drivers_license_number")
 
-     List<Citations> findByDrivers_license_number();
+     List<Citations> findByDrivers_license_number(@Param("drivers_license_number")String drivers_license_number);
 }

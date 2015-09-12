@@ -37,6 +37,6 @@ public class CitationServiceImpl implements CitationService {
     @Override
     public  List<Citations>  getCitations(String drivers_license_number) {
 
-        return repository.findByDrivers_license_number();
+        return repository.findByDrivers_license_number(drivers_license_number);
     }
 }
