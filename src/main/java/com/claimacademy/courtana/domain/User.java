@@ -1,52 +1,46 @@
 package com.claimacademy.courtana.domain;
 
-import com.google.common.base.Objects;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
+import com.google.common.base.Objects;
+
 @Entity
 public class User {
 
-    @Id
-    @NotNull
-    @Size(max = 64)
-    @Column(name = "id", nullable = false, updatable = false)
-    private String id;
+	User() {
+	}
 
-    @NotNull
-    @Size(max = 64)
-    @Column(name = "password", nullable = false)
-    private String password;
+	@Id
+	@NotNull
+	@Size(max = 64)
+	@Column(name = "CARD_NUMBER", nullable = false, updatable = false)
+	private String cardNumber;
 
-    User() {
-    }
+	@NotNull
+	@Size(max = 64)
+	@Column(name = "pin", nullable = false)
+	private String pin;
 
-    public User(final String id, final String password) {
-        this.id = id;
-        this.password = password;
-    }
+	public User(final String cardNumber, final String pin) {
+		this.cardNumber = cardNumber;
+		this.pin = pin;
+	}
 
-    public String getId() {
-        return id;
-    }
+	public String getCardNumber() {
+		return cardNumber;
+	}
 
-    public String getPassword() {
-        return password;
-    }
+	public String getPin() {
+		return pin;
+	}
 
-//    public void setPassword(String password) {
-//        this.password = password;
-//    }
-
-    @Override
-    public String toString() {
-        return Objects.toStringHelper(this)
-                .add("id", id)
-                .add("password", password)
-                .toString();
-    }
+	@Override
+	public String toString() {
+		return Objects.toStringHelper(this).add("Card Number: ", cardNumber)
+				.add(" Pin: ", pin).toString();
+	}
 }
