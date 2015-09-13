@@ -1,14 +1,15 @@
 package com.claimacademy.courtana.domain;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import com.google.common.base.Objects;
 
 @Entity
+@Table(name = "library_card")
 public class User {
 
 	public User() {
@@ -17,110 +18,70 @@ public class User {
 	@Id
 	@NotNull
 	@Size(max = 64)
-	@Column(name = "CARD_NUMBER", nullable = false, updatable = false)
-	private String cardNumber;
+	private String CARD_NUMBER;
 
 	@NotNull
 	@Size(max = 64)
-	@Column(name = "pin", nullable = false)
 	private String pin;
 
-	@Column(name = "drivers_license_number")
-	private String driversLicense;
+	@Size(max = 250)
+	private String drivers_license_number;
 
-	@Column(name = "first_name")
-	private String firstName;
-
-	@Column(name = "last_name")
-	private String lastName;
+	@Size(max = 250)
+	private String first_name;
 
 	@NotNull
-	@Column(name = "street")
+	@Size(max = 250)
+	private String last_name;
+
+	@NotNull
+	@Size(max = 250)
 	private String street;
 
-	@Column(name = "street_2")
-	private String streetTwo;
+	@Size(max = 250)
+	private String street_2;
 
 	@NotNull
-	@Column(name = "city")
+	@Size(max = 250)
 	private String city;
 
 	@NotNull
-	@Column(name = "state")
+	@Size(max = 250)
 	private String state;
 
 	@NotNull
-	@Column(name = "zip")
+	@Size(max = 250)
 	private String zip;
 
 	@NotNull
-	@Column(name = "email")
+	@Size(max = 250)
 	private String email;
 
-	public User(final String cardNumber, final String pin,
-			String driversLicense, String firstName, String lastName,
-			String street, String streetTwo, String city, String state,
+	public User(final String CARD_NUMBER, final String pin,
+			String drivers_license_number, String first_name, String last_name,
+			String street, String street_2, String city, String state,
 			String zip, String email) {
-		this.cardNumber = cardNumber;
+		this.CARD_NUMBER = CARD_NUMBER;
 		this.pin = pin;
-		this.driversLicense = driversLicense;
-		this.firstName = firstName;
-		this.lastName = lastName;
+		this.drivers_license_number = drivers_license_number;
+		this.first_name = first_name;
+		this.last_name = last_name;
 		this.street = street;
-		this.streetTwo = streetTwo;
+		this.street_2 = street_2;
 		this.city = city;
 		this.state = state;
 		this.zip = zip;
 		this.email = email;
 	}
 
-	public String getCardNumber() {
-		return cardNumber;
-	}
-
-	public String getPin() {
-		return pin;
-	}
-
-	public String getDriversLicense() {
-		return driversLicense;
-	}
-
-	public String getFirstName() {
-		return firstName;
-	}
-
-	public String getLastName() {
-		return lastName;
-	}
-
-	public String getStreet() {
-		return street;
-	}
-
-	public String getStreetTwo() {
-		return streetTwo;
-	}
-
-	public String getCity() {
-		return city;
-	}
-
-	public String getState() {
-		return state;
-	}
-
-	public String getZip() {
-		return zip;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
 	@Override
 	public String toString() {
-		return Objects.toStringHelper(this).add("Card Number: ", cardNumber)
-				.add(" Pin: ", pin).toString();
+		return Objects.toStringHelper(this).add("CARD_NUMBER", CARD_NUMBER)
+				.add("pin", pin)
+				.add("drivers_license_number", drivers_license_number)
+				.add("first_name", first_name).add("last_name", last_name)
+				.add("street", street).add("street_2", street_2)
+				.add("city", city).add("state", state).add("zip", zip)
+				.add("email", email).toString();
 	}
 }

@@ -25,14 +25,13 @@ public class LibraryServiceImp implements LibraryService {
 
 	@Override
 	public User validateUser(String cardNumber, String pin) {
-		User existingUser = repository.getOne(cardNumber);
-		if (existingUser.getPin().equals(pin)) {
+		User existingUser = repository.findByLibraryCard(cardNumber);
+		if (existingUser != null) {
 			if (LOGGER.isInfoEnabled()) {
-				LOGGER.info("User Found: " + existingUser.getLastName() + ", "
-						+ existingUser.getFirstName());
+				LOGGER.info("User Found!");
 			}
 			return existingUser;
 		}
-		return new User();
+		return null;
 	}
 }

@@ -6,7 +6,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseStatus;
@@ -28,11 +27,12 @@ public class UserController {
 		this.libraryService = libraryService;
 	}
 
-	@RequestMapping(value = "/user/{name}/{pin}", method = RequestMethod.GET)
-	public User validateLibraryUser(@PathVariable String cardNumber,
-			@PathVariable String pin) {
+	@RequestMapping(value = "/user", method = RequestMethod.GET)
+	public User validateLibraryUser() {
 		LOGGER.debug("Received request to list all users");
-		return libraryService.validateUser(cardNumber, pin);
+		User user = libraryService.validateUser("123", "1234");
+
+		return user;
 	}
 
 	@ExceptionHandler
