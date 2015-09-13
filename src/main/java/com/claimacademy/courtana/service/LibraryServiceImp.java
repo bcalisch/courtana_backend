@@ -1,14 +1,14 @@
 package com.claimacademy.courtana.service;
 
-import javax.inject.Inject;
-
+import com.claimacademy.courtana.domain.User;
+import com.claimacademy.courtana.repository.UserRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 
-import com.claimacademy.courtana.domain.User;
-import com.claimacademy.courtana.repository.UserRepository;
+import javax.inject.Inject;
+import java.util.List;
 
 @Service
 @Validated
@@ -24,8 +24,8 @@ public class LibraryServiceImp implements LibraryService {
 	}
 
 	@Override
-	public User validateUser(String cardNumber, String pin) {
-		User existingUser = repository.findByLibraryCard(cardNumber);
+	public List<User> validateUser(String cardNumber, String pin) {
+		List<User> existingUser = repository.findByLibraryCard(cardNumber);
 		if (existingUser != null) {
 			if (LOGGER.isInfoEnabled()) {
 				LOGGER.info("User Found!");

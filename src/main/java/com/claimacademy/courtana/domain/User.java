@@ -1,15 +1,17 @@
 package com.claimacademy.courtana.domain;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.google.common.base.Objects;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-import com.google.common.base.Objects;
-
 @Entity
 @Table(name = "library_card")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class User {
 
 	public User() {
@@ -39,7 +41,7 @@ public class User {
 	private String street;
 
 	@Size(max = 250)
-	private String street_2;
+	private String street_two;
 
 	@NotNull
 	@Size(max = 250)
@@ -59,7 +61,7 @@ public class User {
 
 	public User(final String CARD_NUMBER, final String pin,
 			String drivers_license_number, String first_name, String last_name,
-			String street, String street_2, String city, String state,
+			String street, String street_two, String city, String state,
 			String zip, String email) {
 		this.CARD_NUMBER = CARD_NUMBER;
 		this.pin = pin;
@@ -67,7 +69,7 @@ public class User {
 		this.first_name = first_name;
 		this.last_name = last_name;
 		this.street = street;
-		this.street_2 = street_2;
+		this.street_two = street_two;
 		this.city = city;
 		this.state = state;
 		this.zip = zip;
@@ -80,7 +82,7 @@ public class User {
 				.add("pin", pin)
 				.add("drivers_license_number", drivers_license_number)
 				.add("first_name", first_name).add("last_name", last_name)
-				.add("street", street).add("street_2", street_2)
+				.add("street", street).add("street_2", street_two)
 				.add("city", city).add("state", state).add("zip", zip)
 				.add("email", email).toString();
 	}

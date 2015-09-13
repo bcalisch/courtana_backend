@@ -2,6 +2,8 @@ package com.claimacademy.courtana.service;
 
 import com.claimacademy.courtana.domain.User;
 
+import java.util.List;
+
 public interface LibraryService {
 
 	/**
@@ -11,5 +13,5 @@ public interface LibraryService {
 	 * @param pin
 	 * @return User
 	 */
-	public User validateUser(String cardNumber, String pin);
+	public List<User> validateUser(String cardNumber, String pin);
 }
