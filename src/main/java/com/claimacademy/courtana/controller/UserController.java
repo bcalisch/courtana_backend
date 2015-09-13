@@ -1,55 +1,44 @@
 package com.claimacademy.courtana.controller;
 
-import com.claimacademy.courtana.domain.User;
-import com.claimacademy.courtana.service.exception.UserAlreadyExistsException;
-import com.claimacademy.courtana.service.UserService;
+import javax.inject.Inject;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.RestController;
 
-import javax.inject.Inject;
-import javax.validation.Valid;
-import java.util.List;
+import com.claimacademy.courtana.domain.User;
+import com.claimacademy.courtana.service.LibraryService;
+import com.claimacademy.courtana.service.exception.UserAlreadyExistsException;
 
 @RestController
 public class UserController {
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(UserController.class);
-    private final UserService userService;
+	private static final Logger LOGGER = LoggerFactory
+			.getLogger(UserController.class);
+	private final LibraryService libraryService;
 
-    @Inject
-    public UserController(final UserService userService) {
-        this.userService = userService;
-    }
+	@Inject
+	public UserController(final LibraryService libraryService) {
+		this.libraryService = libraryService;
+	}
 
-    @RequestMapping(value = "/user", method = RequestMethod.POST)
-    public User createUser(@RequestBody @Valid final User user) {
-        LOGGER.debug("Received request to create the {}", user);
-        return userService.save(user);
-    }
+	@RequestMapping(value = "/user/{name}/{pin}", method = RequestMethod.GET)
+	public User validateLibraryUser(@PathVariable String cardNumber,
+			@PathVariable String pin) {
+		LOGGER.debug("Received request to list all users");
+		return libraryService.validateUser(cardNumber, pin);
+	}
 
-    @RequestMapping(value = "/user", method = RequestMethod.GET)
-    public List<User> listUsers() {
-        LOGGER.debug("Received request to list all users");
-        return userService.getList();
-    }
-
-    @RequestMapping(value = "/parsingplayground", method = RequestMethod.POST)
-    public boolean login(@RequestBody User user) {
-        LOGGER.debug("Received request to list all users");
-        if(user.getId()!=null){
-            return userService.verify(user);
-        }
-
-        return false;
-
-    }
-
-    @ExceptionHandler
-    @ResponseStatus(HttpStatus.CONFLICT)
-    public String handleUserAlreadyExistsException(UserAlreadyExistsException e) {
-        return e.getMessage();
-    }
+	@ExceptionHandler
+	@ResponseStatus(HttpStatus.CONFLICT)
+	public String handleUserAlreadyExistsException(UserAlreadyExistsException e) {
+		return e.getMessage();
+	}
 
 }
