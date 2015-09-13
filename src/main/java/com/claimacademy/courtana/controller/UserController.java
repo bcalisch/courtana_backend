@@ -23,10 +23,10 @@ public class UserController {
 		this.libraryService = libraryService;
 	}
 
-	@RequestMapping(value = "/user", method = RequestMethod.GET)
-	public List<User> validateLibraryUser() {
+	@RequestMapping(value = "/user/{card_number}/{pin}", method = RequestMethod.GET)
+	public List<User> validateLibraryUser(@PathVariable String card_number, @PathVariable String pin) {
 		LOGGER.debug("Received request to list all users");
-		List<User> user = libraryService.validateUser("111", "222");
+		List<User> user = libraryService.validateUser(card_number, pin);
 
 		return user;
 	}
